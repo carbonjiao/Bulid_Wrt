@@ -2,7 +2,7 @@
 echo
 echo
 echo "本脚本garypang13所有，仅适用于在Ubuntu环境下编译"
-echo "https://github.com/garypang13/Actions-OpenWrt""
+echo "https://github.com/kenzok78/OpenWrt""
 echo
 sleep 2s
 sudo apt-get update
@@ -108,24 +108,24 @@ done
 
 if [[ $firmware =~ (redmi-ac2100|phicomm-k2p|newifi-d2|k2p-32m-usb|XY-C5|xiaomi-r3p) ]]; then
 		git clone -b master --depth 1 https://github.com/x-wrt/x-wrt openwrt
-		svn co https://github.com/garypang13/Actions-OpenWrt/trunk/devices openwrt/devices
+		svn co https://github.com/kenzok78/OpenWrt/trunk/devices openwrt/devices
 		cd openwrt
 		wget -cO sdk1.tar.xz https://mirrors.cloud.tencent.com/openwrt/releases/21.02-SNAPSHOT/targets/ramips/mt7621/openwrt-sdk-21.02-SNAPSHOT-ramips-mt7621_gcc-8.4.0_musl.Linux-x86_64.tar.xz &
 elif [[ $firmware =~ (nanopi-r2s|nanopi-r4s) ]]; then
 		git clone -b openwrt-21.02 --depth 1 https://github.com/openwrt/openwrt
-		svn co https://github.com/garypang13/Actions-OpenWrt/trunk/devices openwrt/devices
+		svn co https://github.com/kenzok78/OpenWrt/trunk/devices openwrt/devices
 		cd openwrt
 		wget -cO sdk1.tar.xz https://mirrors.cloud.tencent.com/openwrt/releases/21.02-SNAPSHOT/targets/rockchip/armv8/openwrt-sdk-21.02-SNAPSHOT-rockchip-armv8_gcc-8.4.0_musl.Linux-x86_64.tar.xz &
 elif [[ $firmware == "x86_64" ]]; then
 		git clone -b openwrt-21.02 --depth 1 https://github.com/openwrt/openwrt
-		svn co https://github.com/garypang13/Actions-OpenWrt/trunk/devices openwrt/devices
+		svn co https://github.com/kenzok78/OpenWrt/trunk/devices openwrt/devices
 		cd openwrt
 		wget -cO sdk1.tar.xz https://mirrors.cloud.tencent.com/openwrt/releases/21.02-SNAPSHOT/targets/x86/64/openwrt-sdk-21.02-SNAPSHOT-x86-64_gcc-8.4.0_musl.Linux-x86_64.tar.xz &
 fi
 
 
-read -p "请输入后台地址 [回车默认10.0.0.1]: " ip
-ip=${ip:-"10.0.0.1"}
+read -p "请输入后台地址 [回车默认192.168.3.1]: " ip
+ip=${ip:-"192.168.3.1"}
 echo "您的后台地址为: $ip"
 cp -rf devices/common/* ./
 cp -rf devices/$firmware/* ./
@@ -140,11 +140,11 @@ if [ -f "devices/$firmware/diy.sh" ]; then
 		/bin/bash "devices/$firmware/diy.sh"
 fi
 if [ -f "devices/common/default-settings" ]; then
-	sed -i 's/10.0.0.1/$ip/' devices/common/default-settings
+	sed -i 's/192.168.3.1/$ip/' devices/common/default-settings
 	cp -f devices/common/default-settings package/*/*/default-settings/files/uci.defaults
 fi
 if [ -f "devices/$firmware/default-settings" ]; then
-	sed -i 's/10.0.0.1/$ip/' devices/$firmware/default-settings
+	sed -i 's/192.168.3.1/$ip/' devices/$firmware/default-settings
 	cat -f devices/$firmware/default-settings >> package/*/*/default-settings/files/uci.defaults
 fi
 if [ -n "$(ls -A "devices/common/patches" 2>/dev/null)" ]; then

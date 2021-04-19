@@ -2,7 +2,7 @@
 echo
 echo
 echo "本脚本garypang13所有，仅适用于在Ubuntu环境下编译"
-echo "https://github.com/garypang13/Actions-OpenWrt""
+echo "https://github.com/kenzok78/OpenWrt""
 echo
 
 if [ "$USER" == "root" ]; then
@@ -19,7 +19,7 @@ echo
 clear
 
 rm -Rf openwrt/common openwrt/files openwrt/devices
-svn co https://github.com/garypang13/Actions-OpenWrt/trunk/devices openwrt/devices
+svn co https://github.com/kenzok78/OpenWrt/trunk/devices openwrt/devices
 cd openwrt
 
 git checkout .
