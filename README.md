@@ -2,24 +2,24 @@
 [1]: https://img.shields.io/badge/license-GPLV2-brightgreen.svg
 [2]: /LICENSE
 [3]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg
-[4]: https://github.com/kenzok78/Actions-OpenWrt/pulls
+[4]: https://github.com/kenzok78/OpenWrt/pulls
 [5]: https://img.shields.io/badge/Issues-welcome-brightgreen.svg
-[6]: https://github.com/kenzok78/Actions-OpenWrt/issues/new
+[6]: https://github.com/kenzok78/OpenWrt/issues/new
 [7]: https://img.shields.io/github/v/release/hyird/Action-Openwrt
-[8]: https://github.com/kenzok78/Actions-OpenWrt/releases
+[8]: https://github.com/kenzok78/OpenWrt/releases
 [10]: https://img.shields.io/badge/Contact-telegram-blue
-[11]: https://t.me/opwrts
-[12]: https://github.com/kenzok78/Actions-OpenWrt/workflows/Openwrt-AutoBuild/badge.svg
-[13]: https://github.com/kenzok78/Actions-OpenWrt/actions
+[11]: https://t.me/joinchat/JjxmyRZZXJWb74I-sCrryA
+[12]: https://github.com/kenzok78/OpenWrt/workflows/Openwrt-AutoBuild/badge.svg
+[13]: https://github.com/kenzok78/OpenWrt/actions
 
 [![license][1]][2]
-[![GitHub Stars](https://img.shields.io/github/stars/garypang13/Actions-OpenWrt.svg?style=flat-square&label=Stars)](https://github.com/garypang13/Actions-OpenWrt-Nginx/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/garypang13/Actions-OpenWrt.svg?style=flat-square&label=Forks)](https://github.com/garypang13/Actions-OpenWrt-Nginx/fork)
+[![GitHub Stars](https://img.shields.io/github/stars/kenzok78/OpenWrt/.svg?style=flat-square&label=Stars)](https://github.com/kenzok78/OpenWrt/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/kenzok78/OpenWrt.svg?style=flat-square&label=Forks)](https://github.com/kenzok78/OpenWrt//fork)
 [![PRs Welcome][3]][4]
 [![Issue Welcome][5]][6]
 [![AutoBuild][12]][13]
 
-<a href="https://t.me/opwrts" target="_blank">Telegram</a>
+<a href="https://t.me/joinchat/JjxmyRZZXJWb74I-sCrryA" target="_blank">Telegram</a>
 ### 特色:
 
 + Cutting edge,openwrt官方openwrt-21.02分支版本, 内核升级到5.4. 与官方最新源码同步.
@@ -32,7 +32,7 @@
 
 + 性能,友好度,易用性,插件,以及针对国内特殊环境等的自定义优化, 开箱即用
 
-+ 自定制清爽Material风格新主题Edge
++ 自定制清爽Material风格新Edge主题
 
 + 无需专业知识,无需linux服务器,人人皆可通过云编译定制编译自己的专属固件.
 
@@ -47,7 +47,7 @@
 
 云编译需要 [在此](https://github.com/settings/tokens) 创建个token,然后在此仓库Settings->Secrets中添加个名字为REPO_TOKEN的Secret,填入token值,否者无法触发编译
 
-在仓库Settings->Secrets中分别添加 PPPOE_USERNAME, PPPOE_PASSWD 可设置默认拨号账号密码.有 [安全隐患](https://github.com/kenzok78/Actions-OpenWrt/issues/23)
+在仓库Settings->Secrets中分别添加 PPPOE_USERNAME, PPPOE_PASSWD 可设置默认拨号账号密码.有 [安全隐患](https://github.com/kenzok78/OpenWrt)
 
 Secrets中添加 SCKEY 可通过[Server酱](http://sc.ftqq.com) 推送编译结果到微信
 
@@ -62,7 +62,10 @@ diy云编译教程: [Read the details in my blog (in Chinese) | 中文教程](ht
 
 + Opkg 软件包管理
 + SSR-PLUS
-+ Adblock 基于DNS的广告过滤
++ openclash
++ passwall
++ bypass
++ dnsfilter 基于DNS的广告过滤
 + UPNP 自动端口转发
 + Turbo ACC 网络加速
 
@@ -85,13 +88,13 @@ diy云编译教程: [Read the details in my blog (in Chinese) | 中文教程](ht
  首次编译:
 ```
 screen -S openwrt
-wget -O compile.sh https://raw.githubusercontent.com/garypang13/OpenWrt/master/onekey/compile.sh && bash compile.sh
+wget -O compile.sh https://raw.githubusercontent.com/kenzok78/OpenWrt/master/onekey/compile.sh && bash compile.sh
 ```
 
  二次编译:
 ```
 screen -S openwrt
-wget -O recompile.sh https://raw.githubusercontent.com/garypang13/OpenWrt/master/onekey/recompile.sh && bash recompile.sh
+wget -O recompile.sh https://raw.githubusercontent.com/kenzok78/OpenWrt/master/onekey/recompile.sh && bash recompile.sh
 ```
 
 Build OpenWrt using GitHub Actions
