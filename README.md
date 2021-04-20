@@ -9,7 +9,7 @@
 [8]: https://github.com/kenzok78/OpenWrt/releases
 [10]: https://img.shields.io/badge/Contact-telegram-blue
 [11]: https://t.me/joinchat/JjxmyRZZXJWb74I-sCrryA
-[12]: https://github.com/kenzok78/OpenWrt/workflows/自动编译/badge.svg
+[12]: https://github.com/kenzok78/OpenWrt/workflows/auto build/badge.svg
 [13]: https://github.com/kenzok78/OpenWrt/actions
 
 [![license][1]][2]
