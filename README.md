@@ -21,15 +21,15 @@
 
 <a href="https://t.me/joinchat/JjxmyRZZXJWb74I-sCrryA" target="_blank">Telegram</a>
 
-## 源码来源：
+#### 源码来源：
 [![Lean](https://img.shields.io/badge/autoBuild-garypang13-red.svg?style=flat&logo=appveyor)](https://github.com/garypang13/OpenWrt)
  [![Lienol](https://img.shields.io/badge/passwall-openwrt-blueviolet.svg?style=flat&logo=appveyor)](https://github.com/xiaorouji/openwrt-passwall) 
 [![immortalwrt](https://img.shields.io/badge/immortalwrt-openwrt-orange.svg?style=flat&logo=appveyor)](https://github.com/immortalwrt/immortalwrt) 
 
-## 固件下载
+#### 固件下载
 固件地址：[![GitHub release (latest by date)](https://img.shields.io/github/v/release/kenzok78/OpenWrt?style=for-the-badge&label=Download)](https://github.com/kenzok78/OpenWrt/actions)
 
-### 特色:
+#### 特色:
 
 + Cutting edge,openwrt官方openwrt-21.02分支版本, 内核升级到5.4. 与官方最新源码同步.
 
@@ -67,7 +67,7 @@ Secrets中添加 TELEGRAM_CHAT_ID, TELEGRAM_TOKEN 可推送编译结果到Telegr
    + 方式2: 请在支持油猴的浏览器中安装 [脚本](https://greasyfork.org/scripts/407616-github-actions-trigger/code/Github%20Actions%20Trigger.user.js) ,仓库右上角会出现 x86_64 Actions,K2P Actions等按钮,点击对应按钮即可.更多玩法 [repo-dispatcher](https://github.com/tete1030/github-repo-dispatcher)
 diy云编译教程: [Read the details in my blog (in Chinese) | 中文教程](https://p3terx.com/archives/build-openwrt-with-github-actions.html)
 
-### 默认插件包含:
+#### 默认插件包含:
 
 + Opkg 软件包管理
 + SSR-PLUS
@@ -108,14 +108,14 @@ wget -O recompile.sh https://raw.githubusercontent.com/kenzok78/OpenWrt/master/o
 
 Build OpenWrt using GitHub Actions
 
-### Usage
+#### Usage
 
 - Sign up for [GitHub Actions](https://github.com/features/actions/signup)
 - Fork [this GitHub repository](https://github.com/kenzok78/OpenWrt)
 - click the `Star` button, and the build will starts automatically.Progress can be viewed on the Actions page.
 - When the build is complete, click the `Artifacts` button in the upper right corner of the Actions page to download the binaries.
 
-### Acknowledgments
+#### Acknowledgments
 - [OpenWrt](https://github.com/openwrt/openwrt)
 - [Lean's OpenWrt](https://github.com/coolsnowwolf/lede)
 - [CTCGFW's Team](https://github.com/immortalwrt/immortalwrt)
