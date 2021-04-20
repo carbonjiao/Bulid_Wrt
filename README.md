@@ -14,7 +14,6 @@
 [![PRs Welcome][3]][4]
 [![Issue Welcome][5]][6]
 [![Contact Me][10]][11]
-[![AutoBuild][12]][13]
 
 <a href="https://t.me/joinchat/JjxmyRZZXJWb74I-sCrryA" target="_blank">Telegram</a>
 
