@@ -1,19 +1,22 @@
 # Actions OpenWrt Snapshot
-[1]: https://img.shields.io/badge/license-MIT-brightgreen.svg
+[1]: https://img.shields.io/badge/license-GPLV2-brightgreen.svg
 [2]: /LICENSE
 [3]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg
 [4]: https://github.com/kenzok78/OpenWrt/pulls
 [5]: https://img.shields.io/badge/Issues-welcome-brightgreen.svg
-[6]: https://github.com/https://github.com/kenzok78/OpenWrt/issues/new
-[7]: https://img.shields.io/badge/release-v2.1-blue.svg?
+[6]: https://github.com/kenzok78/OpenWrt/issues/new
+[7]: https://img.shields.io/github/v/release/hyird/Action-Openwrt
+[8]: https://github.com/kenzok78/OpenWrt/releases
 [10]: https://img.shields.io/badge/Contact-telegram-blue
 [11]: https://t.me/joinchat/JjxmyRZZXJWb74I-sCrryA
 [12]: https://github.com/kenzok78/OpenWrt/workflows/AutoBuild/badge.svg
 [13]: https://github.com/kenzok78/OpenWrt/actions
+
 [![license][1]][2]
+[![GitHub Stars](https://img.shields.io/github/stars/kenzok78/OpenWrt.svg?style=flat-square&label=Stars)](https://github.com/kenzok78/OpenWrt/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/kenzok78/OpenWrt.svg?style=flat-square&label=Forks)](https://github.com/kenzok78/OpenWrt/fork)
 [![PRs Welcome][3]][4]
 [![Issue Welcome][5]][6]
-[![Contact Me][10]][11]
 [![AutoBuild][12]][13]
 
 <a href="https://t.me/joinchat/JjxmyRZZXJWb74I-sCrryA" target="_blank">Telegram</a>
@@ -100,7 +103,7 @@ Build OpenWrt using GitHub Actions
 ### Usage
 
 - Sign up for [GitHub Actions](https://github.com/features/actions/signup)
-- Fork [this GitHub repository](https://github.com/garypang13/OpenWrt)
+- Fork [this GitHub repository](https://github.com/kenzok78/OpenWrt)
 - click the `Star` button, and the build will starts automatically.Progress can be viewed on the Actions page.
 - When the build is complete, click the `Artifacts` button in the upper right corner of the Actions page to download the binaries.
 
@@ -109,7 +112,7 @@ Build OpenWrt using GitHub Actions
 - [Lean's OpenWrt](https://github.com/coolsnowwolf/lede)
 - [CTCGFW's Team](https://github.com/immortalwrt/immortalwrt)
 - [Lienol](https://github.com/Lienol/openwrt)
-- [P3TERX](https://github.com/P3TERX/Actions-OpenWrt/blob/master/LICENSE)
+- [P3TERX](https://github.com/P3TERX/OpenWrt/blob/master/LICENSE)
 - [X-WRT](https://github.com/x-wrt/x-wrt)
 - [upload-release-action](https://github.com/svenstaro/upload-release-action)
 - [Microsoft](https://www.microsoft.com)
@@ -121,13 +124,13 @@ Build OpenWrt using GitHub Actions
 - [csexton/debugger-action](https://github.com/csexton/debugger-action)
 - [Cisco](https://www.cisco.com/)
 
-![](https://github.com/garypang13/luci-theme-edge/raw/master/Screenshots/1.png)
-![](https://github.com/garypang13/luci-theme-edge/raw/master/Screenshots/2.png)
-![](https://github.com/garypang13/luci-theme-edge/raw/master/Screenshots/3.png)
-![](https://github.com/garypang13/luci-theme-edge/raw/master/Screenshots/8.png)
-![](https://github.com/garypang13/luci-theme-edge/raw/master/Screenshots/4.png)
-![](https://github.com/garypang13/luci-theme-edge/raw/master/Screenshots/5.png)
+![](https://github.com/kenzok78/luci-theme-edge/raw/master/Screenshots/1.png)
+![](https://github.com/kenzok78/luci-theme-edge/raw/master/Screenshots/2.png)
+![](https://github.com/kenzok78/luci-theme-edge/raw/master/Screenshots/3.png)
+![](https://github.com/kenzok78/luci-theme-edge/raw/master/Screenshots/8.png)
+![](https://github.com/kenzok78/luci-theme-edge/raw/master/Screenshots/4.png)
+![](https://github.com/kenzok78/luci-theme-edge/raw/master/Screenshots/5.png)
 <br/>
 <br />
-<img src="https://github.com/garypang13/luci-theme-edge/raw/master/Screenshots/6.png" width="550" />
-![](https://github.com/garypang13/luci-theme-edge/raw/master/Screenshots/7.png)
+<img src="https://github.com/kenzok78/luci-theme-edge/raw/master/Screenshots/6.png" width="550" />
+![](https://github.com/kenzok78/luci-theme-edge/raw/master/Screenshots/7.png)
