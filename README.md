@@ -96,11 +96,6 @@ screen -S openwrt
 wget -O recompile.sh https://raw.githubusercontent.com/kenzok78/OpenWrt/master/onekey/recompile.sh && bash recompile.sh
 ```
 
-##### Usage
 
-- Sign up for [GitHub Actions](https://github.com/features/actions/signup)
-- Fork [this GitHub repository](https://github.com/kenzok78/OpenWrt)
-- click the `Star` button, and the build will starts automatically.Progress can be viewed on the Actions page.
-- When the build is complete, click the `Artifacts` button in the upper right corner of the Actions page to download the binaries.
 
 
