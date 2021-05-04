@@ -1,8 +1,8 @@
 #/bin/bash
 echo
 echo
-echo "本脚本garypang13所有，仅适用于在Ubuntu环境下编译"
-echo "https://github.com/kenzok78/OpenWrt""
+echo "本脚本仅适用于在Ubuntu环境下编译 https://github.com/kenzok78/OpenWrt"
+echo
 echo
 
 if [ "$USER" == "root" ]; then
@@ -48,24 +48,10 @@ else
 	echo "无法识别固件类型,请退出"
 fi
 
-if [[ $firmware =~ (redmi-ac2100|phicomm-k2p|newifi-d2|k2p-32m-usb|XY-C5|xiaomi-r3p) ]]; then
-	if [[ ! -f staging_dir/toolchain-mipsel_24kc_gcc-8.4.0_musl ]]; then
-		wget -cO sdk1.tar.xz https://mirrors.cloud.tencent.com/openwrt/snapshots/targets/ramips/mt7621/openwrt-sdk-21.02-SNAPSHOT-ramips-mt7621_gcc-8.4.0_musl.Linux-x86_64.tar.xz
-	fi
-elif [[ $firmware =~ (nanopi-r2s|nanopi-r4s) ]]; then
-	if [[ ! -f staging_dir/toolchain-aarch64_generic_gcc-8.4.0_musl ]]; then
-		wget -cO sdk1.tar.xz https://mirrors.cloud.tencent.com/openwrt/snapshots/targets/rockchip/armv8/openwrt-sdk-21.02-SNAPSHOT-rockchip-armv8_gcc-8.4.0_musl.Linux-x86_64.tar.xz
-	fi
-elif [[ $firmware == "x86_64" ]]; then
-	if [[ ! -f staging_dir/toolchain-x86-64_gcc-8.4.0_musl ]]; then
-		wget -cO sdk1.tar.xz https://mirrors.cloud.tencent.com/openwrt/snapshots/targets/x86/64/openwrt-sdk-21.02-SNAPSHOT-x86-64_gcc-8.4.0_musl.Linux-x86_64.tar.xz
-	fi
-fi
-
 echo
 
-read -p "请输入后台地址 [回车默认10.0.0.1]: " ip
-ip=${ip:-"10.0.0.1"}
+read -p "请输入后台地址 [回车默认192.168.3.1]: " ip
+ip=${ip:-"192.168.3.1"}
 echo "您的后台地址为: $ip"
 
 rm -Rf feeds package/feeds common files diy tmp
@@ -84,11 +70,11 @@ if [ -f "devices/$firmware/diy.sh" ]; then
 		/bin/bash "devices/$firmware/diy.sh"
 fi
 if [ -f "devices/common/default-settings" ]; then
-	sed -i 's/10.0.0.1/$ip/' devices/common/default-settings
+	sed -i 's/192.168.3.1/$ip/' devices/common/default-settings
 	cp -f devices/common/default-settings package/*/*/default-settings/files/uci.defaults
 fi
 if [ -f "devices/$firmware/default-settings" ]; then
-	sed -i 's/10.0.0.1/$ip/' devices/$firmware/default-settings
+	sed -i 's/192.168.3.1/$ip/' devices/$firmware/default-settings
 	cat devices/$firmware/default-settings >> package/*/*/default-settings/files/uci.defaults
 fi
 if [ -n "$(ls -A "devices/common/patches" 2>/dev/null)" ]; then
@@ -129,20 +115,6 @@ echo
 echo
 sleep 3s
 
-if [ -f sdk1.tar.xz ]; then
-	mkdir sdk
-	tar -xJf sdk1.tar.xz -C sdk
-	cp -rf sdk/*/staging_dir/* ./staging_dir/
-	rm -rf sdk sdk1.tar.xz
-	if [ -f /usr/bin/python ]; then
-		ln -sf /usr/bin/python staging_dir/host/bin/python
-	else
-		ln -sf /usr/bin/python3 staging_dir/host/bin/python
-	fi
-	ln -sf /usr/bin/python3 staging_dir/host/bin/python3
-fi
-
-sed -i '/\(tools\|toolchain\)\/Makefile/d' Makefile
 sed -i 's,$(STAGING_DIR_HOST)/bin/upx,upx,' package/feeds/custom/*/Makefile
 
 make -j$(($(nproc)+1)) download v=s ; make -j$(($(nproc)+1)) || make -j1 V=s
