@@ -1,7 +1,7 @@
 #/bin/bash
 echo
 echo
-echo "本脚本仅适用于在Ubuntu环境下编译 https://github.com/kenzok78/OpenWrt"
+echo "本脚本仅适用于在Ubuntu环境下编译 https://github.com/kenzok78/Bulid_Wrt"
 echo
 echo
 
@@ -19,7 +19,7 @@ echo
 clear
 
 rm -Rf openwrt/common openwrt/files openwrt/devices
-svn co https://github.com/kenzok78/OpenWrt/trunk/devices openwrt/devices
+svn co https://github.com/kenzok78/Bulid_Wrt/trunk/devices openwrt/devices
 cd openwrt
 
 git checkout .

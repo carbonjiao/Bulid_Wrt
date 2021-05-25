@@ -39,7 +39,7 @@ jobs:
       uses: styfle/cancel-workflow-action@main
       if: contains(github.event.action, 'cw')
       with:
-        workflow_id: 359459607
+        workflow_id: 8288213
         access_token: ${{ github.token }}
 
     - name: Load Settings.ini
@@ -61,11 +61,11 @@ jobs:
 
     - name: Trigger Packages Update
       run: |
-        gitdate=$(curl -s "https://api.github.com/repos/kenzok78/jell/actions/runs" | jq -r '.workflow_runs[0].updated_at')
+        gitdate=$(curl -s "https://api.github.com/repos/kenzok8/jell/actions/runs" | jq -r '.workflow_runs[0].updated_at')
         gitdate=$(date -d "$gitdate" +%s)
         now=$(date -d "$(date '+%Y-%m-%d %H:%M:%S')" +%s)
         if [[ $(expr $gitdate + 300) < $now ]]; then
-          curl -X POST https://api.github.com/repos/kenzok78/jell/dispatches \
+          curl -X POST https://api.github.com/repos/kenzok8/jell/dispatches \
             -H "Accept: application/vnd.github.everest-preview+json" \
             -H "Authorization: token ${{ secrets.REPO_TOKEN }}" \
           --data '{"event_type": "update"}'
@@ -119,6 +119,7 @@ jobs:
         cp -rf devices/${{matrix.target}}/. openwrt/
         cd openwrt
         ./scripts/feeds update -a
+        cd feeds/custom && git pull
 
     - name: Load custom configuration
       run: |
