@@ -32,7 +32,7 @@ jobs:
     - name: 取消运行的工作流
       uses: styfle/cancel-workflow-action@main
       with:
-        workflow_id: 8288213
+        workflow_id: 9397633
         access_token: ${{ github.token }}
 
     - name: 触发程序更新
