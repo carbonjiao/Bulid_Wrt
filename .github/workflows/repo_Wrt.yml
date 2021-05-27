@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: 项目进程
+name: Repo Dispatcher
 
 on: 
   # push: 
@@ -29,13 +29,13 @@ jobs:
   build:
     runs-on: Ubuntu-20.04
     steps:
-    - name: 取消运行的工作流
+    - name: cancel running workflows
       uses: styfle/cancel-workflow-action@main
       with:
         workflow_id: 9397633
         access_token: ${{ github.token }}
 
-    - name: 触发程序更新
+    - name: Trigger Packages Update
       run: |
         sudo timedatectl set-timezone "$TZ"
         if [ ${{ github.event.inputs.ssh }} == 'true' ]; then
@@ -46,7 +46,7 @@ jobs:
         -H "Authorization: token ${{ secrets.REPO_TOKEN }}" \
         --data '{"event_type": "update"}'
 
-    - name: 触发编译
+    - name: Trigger Compile
       run: |
         curl \
         -X POST https://api.github.com/repos/${{ github.repository }}/dispatches \
