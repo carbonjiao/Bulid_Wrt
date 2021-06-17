@@ -95,9 +95,7 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
-        if [[ ${{matrix.target}} =~ (redmi-ac2100|phicomm-k2p|newifi-d2|k2p-32m-usb|XY-C5|xiaomi-r3p) ]]; then
-            wget -cO sdk.tar.xz https://downloads.openwrt.org/releases/21.02-SNAPSHOT/targets/ramips/mt7621/openwrt-sdk-21.02-SNAPSHOT-ramips-mt7621_gcc-8.4.0_musl.Linux-x86_64.tar.xz
-        elif [[ ${{matrix.target}} == "x86_64" ]]; then
+        if [[ ${{matrix.target}} == "x86_64" ]]; then
             wget -cO sdk.tar.xz https://downloads.openwrt.org/releases/21.02-SNAPSHOT/targets/x86/64/openwrt-sdk-21.02-SNAPSHOT-x86-64_gcc-8.4.0_musl.Linux-x86_64.tar.xz
         elif [[ ${{matrix.target}} =~ (nanopi-r2s|nanopi-r4s) ]]; then
             wget -cO sdk.tar.xz https://downloads.openwrt.org/releases/21.02-SNAPSHOT/targets/rockchip/armv8/openwrt-sdk-21.02-SNAPSHOT-rockchip-armv8_gcc-8.4.0_musl.Linux-x86_64.tar.xz
@@ -150,7 +148,7 @@ jobs:
         cd openwrt
         find "devices/common/patches" -type f ! -path 'devices/common/patches/china_mirrors.patch' -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 -E --forward --no-backup-if-mismatch"
         if [ -n "$(ls -A "devices/${{matrix.target}}/patches" 2>/dev/null)" ]; then
-          find "devices/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 -E --forward --no-backup-if-mismatch"
+          find "devices/${{matrix.target}}/patches" -type f -name '*.patch' ! -name '*.revert.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 -E --forward --no-backup-if-mismatch"
         fi
         
     - name: Default PPPOE Setting
@@ -200,8 +198,6 @@ jobs:
         cd firmware
         echo ${{ env.date4 }} > version.txt
         rename -v "s/^openwrt/${{ env.date3 }}-openwrt/" *
-        rename -v "s/xiaomi_redmi-router/redmi/" *bin
-        rename -v "s/(d-team_|xiaoyu_)//" *bin
         rename -v "s/friendlyarm_//" *gz
         md5=$((md5sum *squashfs-sysupgrade* || md5sum *squashfs-combined-efi*) | awk '{print $1}') 2>/dev/null
         echo $md5 >> version.txt
@@ -210,9 +206,7 @@ jobs:
         RANDOM=$$$(date +%s)
         rand=$[$RANDOM % ${#Emoji[@]}]
         echo "EMOJI=${Emoji[$rand]}" >> $GITHUB_ENV
-        if [ ${{matrix.target}} == "phicomm-k2p" ]; then
-        echo "NOTICE=刷机时breed里的闪存布局请选择斐讯而非默认的公版" >> $GITHUB_ENV
-        elif [ ${{matrix.target}} == "x86_64" ]; then
+        if [ ${{matrix.target}} == "x86_64" ]; then
         echo "NOTICE=请分配不少于800M的存储容量" >> $GITHUB_ENV
         fi
 
@@ -224,47 +218,16 @@ jobs:
         name: ${{ env.date3 }} ${{matrix.target}}
         path: ${{ env.FIRMWARE }}
 
-    - name: Deploy files to server
-      uses: easingthemes/ssh-deploy@main
-      if: env.SSH_PRIVATE_KEY && ! contains(github.event.action, 'noser')
-      with:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        ARGS: "-avzr --exclude="
-        SOURCE: firmware/
-        REMOTE_HOST: op.supes.top
-        REMOTE_USER: root
-        TARGET: "/www/wwwroot/op.supes.top/firmware/${{matrix.target}}/"
- 
-    - name: Upload firmware to cowtransfer
-      if: env.UPLOAD_FIRMWARE_TO_COWTRANSFER == 'true'
-      continue-on-error: true
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        cowurl=$(./transfer cow --block 2621440 -s --no-progress ${FIRMWARE})
-        cowurl=$(echo $cowurl | grep -o -E "https[^ ]*")
-        echo "COWURL=$cowurl" >> $GITHUB_ENV
-        echo "Download Link: ${{ env.EMOJI }} $cowurl ${{ env.EMOJI }} 🚀"
- 
-    - name: Upload firmware to WeTransfer
-      if: env.UPLOAD_FIRMWARE_TO_WETRANSFER == 'true' && ! contains(github.event.action, 'noup')
-      continue-on-error: true
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        wetrans=$(./transfer wet -s -p 16 --no-progress ${FIRMWARE})
-        wetrans=$(echo $wetrans | grep -o -E "https[^ ]*")
-        echo "WETRANS=$wetrans" >> $GITHUB_ENV
-        echo "Download Link: ${{ env.EMOJI }} $wetrans ${{ env.EMOJI }} 🚀"
-
     - name: Create release
       id: create_release
       if: env.REPO_TOKEN && env.UPLOAD_FIRMWARE_FOR_RELEASE == 'true'
       continue-on-error: true
       run: |
-        echo -e "墙内加速下载 🚀:\n" >> release.txt
-        echo -e "[腾讯云] (https://op.supes.top/firmware/${{matrix.target}}/ ☁)\n" >> release.txt
-        [ ${{ env.WETRANS }} ] && echo -e "[WeTransfer] (${{ env.WETRANS }} 🗽)\n" >> release.txt
-        [ ${{ env.COWURL }} ] && echo -e "[奶牛上传] (${{ env.COWURL }} 🐮)\n" >> release.txt
-        [ ${{ env.NOTICE }} ] && echo -e "${{ env.NOTICE }}" >> release.txt || true
+        echo "::set-output name=release_tag::$(date +"%m.%d")"
+        touch release.txt
+        [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
+        [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
+        echo "::set-output name=status::success"
 
     - name: Upload firmware for release
       uses: softprops/action-gh-release@v1
