@@ -85,7 +85,7 @@ done
 
 
 git clone -b openwrt-21.02 --depth 1 https://github.com/openwrt/openwrt
-svn co https://github.com/kenzok78/Bulid_Wrt/trunk/devices openwrt/devices
+svn export https://github.com/kenzok78/Bulid_Wrt/trunk/devices openwrt/devices
 
 cd openwrt
 
@@ -114,12 +114,12 @@ if [ -f "devices/$firmware/diy.sh" ]; then
 		/bin/bash "devices/$firmware/diy.sh"
 fi
 if [ -f "devices/common/default-settings" ]; then
-	sed -i 's/192.168.3.1/$ip/' devices/common/default-settings
+	sed -i "s/192.168.3.1/$ip/" devices/common/default-settings
 	cp -f devices/common/default-settings package/*/*/default-settings/files/uci.defaults
 fi
 if [ -f "devices/$firmware/default-settings" ]; then
-	sed -i 's/192.168.3.1/$ip/' devices/$firmware/default-settings
-	cat -f devices/$firmware/default-settings >> package/*/*/default-settings/files/uci.defaults
+	sed -i "s/192.168.3.1/$ip/" devices/$firmware/default-settings
+	cat devices/$firmware/default-settings >> package/*/*/default-settings/files/uci.defaults
 fi
 if [ -n "$(ls -A "devices/common/patches" 2>/dev/null)" ]; then
           find "devices/common/patches" -type f -name '*.patch' ! -name '*.revert.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward"
